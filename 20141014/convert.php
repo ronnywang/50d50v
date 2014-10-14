@@ -28,10 +28,21 @@ class Converter
         $output = fopen('php://output', 'w');
         $lines = $this->getLines();
 
+        $parties = array(
+            '無' => 0,
+            '無黨籍及未經政黨推薦' => 0,
+            '中國國民黨' => 1,
+            '民主進步黨' => 2,
+            '台灣團結聯盟' => 3,
+            '中華統一促進黨' => 4,
+            '親民黨' => 5,
+            '綠黨' => 6,
+        );
+
         switch ($type) {
         case 'age':
             fputcsv($output, array(
-                '村里', '姓名', '年齡', 'COUNTY_ID', 'TOWN_ID', 'VILLAGE_ID', 'OBJECT_ID',
+                '村里', '姓名', '年齡', '性別', '政黨', '政黨ID', '得票率', 'COUNTY_ID', 'TOWN_ID', 'VILLAGE_ID', 'OBJECT_ID',
             ));
             foreach ($lines as $values) {
                 if ($values[8] != '*') {
@@ -45,6 +56,10 @@ class Converter
                     $values[0], // 村里
                     $values[1], // 姓名
                     2014 - $values[4], // 年齡
+                    ('男' == $values[3]) ? 1: 0, // 性別(1 男, 0 女)
+                    $values[5], // 政黨
+                    $parties[$values[5]], // 政黨ID
+                    floatval(rtrim($values[7], '%')), // 得票率
                     $id[0], // COUNTY_ID
                     $id[1], // TOWN_ID
                     $id[2], // VILLAGE_ID
