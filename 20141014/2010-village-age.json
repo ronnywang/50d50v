@@ -1,0 +1,16 @@
+{
+  "type": "ColorMap",
+  "map_repo": {"user": "ronnywang", "repository": "twgeojson", "path" : "twvillage2010.json"},
+  "data_repo": {"user": "ronnywang", "repository": "50d50v", "path" : "20141014/2010-village-age.csv"},
+  "data_columns": ["OBJECT_ID"],
+  "map_columns": ["objectid_1"],
+  "tabs": {
+     "2010 村里長年齡地圖" : {
+         "column" : "年齡",
+         "colors" : [
+             [20, [255, 255, 0]],
+             [100, [0, 0, 255]]
+         ]
+     }
+  }
+}
