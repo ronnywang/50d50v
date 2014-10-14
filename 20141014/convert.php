@@ -42,7 +42,13 @@ class Converter
                     error_log($values[0]);
                 }
                 fputcsv($output, array(
-                    $values[0], $values[1], 2014 - $values[4], $id[0], $id[1], $id[2], $id[3],
+                    $values[0], // 村里
+                    $values[1], // 姓名
+                    2014 - $values[4], // 年齡
+                    $id[0], // COUNTY_ID
+                    $id[1], // TOWN_ID
+                    $id[2], // VILLAGE_ID
+                    $id[3], // OBJECT_ID
                 ));
 
             }
