@@ -2,18 +2,38 @@
 
 class Converter
 {
-    public function main($type)
+    public function getLines()
     {
         $fp = fopen(__DIR__ . '/20100601S1E1.csv', 'r');
-        $output = fopen('php://output', 'w');
         $columns = fgetcsv($fp);
+        $lines = array();
+        while ($values = fgetcsv($fp)) {
+            $lines[] = $values;
+        }
+        fclose($fp);
+
+        $fp = fopen(__DIR__ . '/20101101V1B3.csv', 'r');
+        $columns = fgetcsv($fp);
+        while ($values = fgetcsv($fp)) {
+            $lines[] = $values;
+        }
+        fclose($fp);
+
+        return $lines;
+
+    }
+
+    public function main($type)
+    {
+        $output = fopen('php://output', 'w');
+        $lines = $this->getLines();
 
         switch ($type) {
         case 'age':
             fputcsv($output, array(
                 '村里', '姓名', '年齡', 'COUNTY_ID', 'TOWN_ID', 'VILLAGE_ID', 'OBJECT_ID',
             ));
-            while ($values = fgetcsv($fp)) {
+            foreach ($lines as $values) {
                 if ($values[8] != '*') {
                     continue;
                 }
@@ -49,6 +69,7 @@ class Converter
         $name = str_replace('糠', '槺', $name);
         $name = str_replace('雞', '鷄', $name);
         $name = str_replace('州', '洲', $name);
+        $name = str_replace('濓', '濂', $name);
         $name = str_replace('銅境', '銅鏡', $name);
         $name = str_replace('南詋里', '南瑤里', $name);
         $name = str_replace('陜', '陝', $name);
