@@ -1,0 +1,17 @@
+{
+  "type": "ColorMap",
+  "map_repo": {"user": "ronnywang", "repository": "twgeojson", "path" : "twvillage2010.json"},
+  "data_repo": {"user": "ronnywang", "repository": "50d50v", "path" : "20141020/2009-bluegreen.csv"},
+  "data_columns": ["OBJECT_ID"],
+  "map_columns": ["objectid_1"],
+  "tabs": {
+     "2009 縣市長選舉藍綠版圖" : {
+         "column" : "偏藍比率",
+         "colors" : [
+             [0, [0, 255, 0]],
+             [0.5, [255, 255, 255]],
+            [1, [0, 0, 255]]
+         ]
+     }
+  }
+}
